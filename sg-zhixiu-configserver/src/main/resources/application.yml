@@ -1,0 +1,26 @@
+server:
+   port: 8096
+   address: 0.0.0.0
+   maxPostSize: -1
+   maxHttpHeaderSize: 102400
+spring:
+   mvc:
+      static-path-pattern: /**
+   application:
+      name: sg-zhixiu-configserver
+   jackson:
+      date-format: yyyy-MM-dd HH:mm:ss
+      time-zone: GMT+8
+   main:
+      allow-bean-definition-overriding: true
+   cloud:
+      config:
+         server:
+            git:
+               uri: https://github.com/yelantingfengyu/config-repo
+               username: fengyuyelanting@126.com
+               password: Admin@1234
+eureka:
+   client:
+      service-url:
+         defaultZone: http://localhost:8764/eureka

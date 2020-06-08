@@ -1,0 +1,13 @@
+spring:
+   cloud:
+      config:
+         discovery:
+            enabled: true
+            service-id: SG-ZHIXIU-CONFIGSERVER
+         profile: dev
+   application:
+      name: sg-zhixiu-order
+eureka:
+   client:
+      service-url:
+         defaultZone: http://localhost:8764/eureka/

@@ -12,6 +12,25 @@ target/
 .settings
 .springBeans
 .sts4-cache
+work/*
+my-tomcat
+my-tomcat/*
+logs
+logs/* 
+bin
+bin/*
+.mvn
+.mvn/*
+**/test-output/
+**/test-output/*
+**/logs/
+**/logs/*
+
+### TESTNG###
+**/test-output/
+**/logs/
+**/test-output/*
+**/logs/*
 
 ### IntelliJ IDEA ###
 .idea

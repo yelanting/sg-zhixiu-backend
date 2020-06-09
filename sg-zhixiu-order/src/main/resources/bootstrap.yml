@@ -3,7 +3,7 @@ spring:
       config:
          discovery:
             enabled: true
-            service-id: SG-ZHIXIU-CONFIGSERVER
+            service-id: sg-zhixiu-configserver
          profile: dev
    application:
       name: sg-zhixiu-order

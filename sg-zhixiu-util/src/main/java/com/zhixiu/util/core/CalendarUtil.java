@@ -808,8 +808,8 @@ public class CalendarUtil {
 		return formatDate(DEFAULT_FORMAT_WHOLE, now());
 	}
 
-	public static void main(String[] args) {
-		System.out.println(getUsualNowDateTime());
-	}
+	// public static void main(String[] args) {
+	// System.out.println(getUsualNowDateTime());
+	// }
 
 }

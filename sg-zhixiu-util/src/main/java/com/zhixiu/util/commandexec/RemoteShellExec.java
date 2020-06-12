@@ -20,133 +20,133 @@ import com.zhixiu.util.commandexec.domain.RemoteShellDTO;
  * @see :
  */
 public class RemoteShellExec {
-    private RemoteShellDTO remoteShellDTO;
-    private InputStream inputStream;
-    private PrintStream out;
-    private TelnetClient telnetClient = new TelnetClient("VT220");
+	private RemoteShellDTO remoteShellDTO;
+	private InputStream inputStream;
+	private PrintStream out;
+	private TelnetClient telnetClient = new TelnetClient("VT220");
 
-    public RemoteShellExec() {
-    }
+	public RemoteShellExec() {
+	}
 
-    public RemoteShellExec(RemoteShellDTO remoteShellDTO) {
-        this.remoteShellDTO = remoteShellDTO;
-    }
+	public RemoteShellExec(RemoteShellDTO remoteShellDTO) {
+		this.remoteShellDTO = remoteShellDTO;
+	}
 
-    /**
-     * @return the remoteShellDTO
-     */
-    public RemoteShellDTO getRemoteShellDTO() {
-        return remoteShellDTO;
-    }
+	/**
+	 * @return the remoteShellDTO
+	 */
+	public RemoteShellDTO getRemoteShellDTO() {
+		return remoteShellDTO;
+	}
 
-    /**
-     * @param remoteShellDTO
-     *            the remoteShellDTO to set
-     */
-    public void setRemoteShellDTO(RemoteShellDTO remoteShellDTO) {
-        this.remoteShellDTO = remoteShellDTO;
-    }
+	/**
+	 * @param remoteShellDTO
+	 *            the remoteShellDTO to set
+	 */
+	public void setRemoteShellDTO(RemoteShellDTO remoteShellDTO) {
+		this.remoteShellDTO = remoteShellDTO;
+	}
 
-    public void getConnection() {
-        try {
-            this.telnetClient.connect(this.remoteShellDTO.getRemoteIp(),
-                    this.remoteShellDTO.getRemotePort());
+	public void getConnection() {
+		try {
+			this.telnetClient.connect(this.remoteShellDTO.getRemoteIp(),
+			        this.remoteShellDTO.getRemotePort());
 
-            this.inputStream = this.telnetClient.getInputStream();
-            this.out = new PrintStream(this.telnetClient.getOutputStream());
+			this.inputStream = this.telnetClient.getInputStream();
+			this.out = new PrintStream(this.telnetClient.getOutputStream());
 
-            System.out.println("连接成功");
-            this.remoteShellDTO.setPrompt(
-                    "root".equals(this.remoteShellDTO.getLoginUsername()) ? '#'
-                            : '>');
-            login();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+			System.out.println("连接成功");
+			this.remoteShellDTO.setPrompt(
+			        "root".equals(this.remoteShellDTO.getLoginUsername()) ? '#'
+			                : '>');
+			login();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 
-    public void execute() {
-        getConnection();
-        try {
-            String result = sendCommand(this.remoteShellDTO.getRemoteShell());
-            System.out
-                    .println(new String(result.getBytes("ISO-8859-1"), "gbk"));
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        } finally {
-            disconnect();
-        }
-    }
+	public void execute() {
+		getConnection();
+		try {
+			String result = sendCommand(this.remoteShellDTO.getRemoteShell());
+			System.out
+			        .println(new String(result.getBytes("ISO-8859-1"), "gbk"));
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		} finally {
+			disconnect();
+		}
+	}
 
-    public String sendCommand(String command) {
-        write(command);
-        return readUntil(this.remoteShellDTO.getPrompt() + "");
-    }
+	public String sendCommand(String command) {
+		write(command);
+		return readUntil(this.remoteShellDTO.getPrompt() + "");
+	}
 
-    public String readUntil(String pattern) {
-        char lastChar = pattern.charAt(pattern.length() - 1);
-        StringBuffer sBuffer = new StringBuffer();
-        try {
-            char ch = (char) this.inputStream.read();
-            while (true) {
-                sBuffer.append(ch);
-                if (ch == lastChar) {
-                    if (sBuffer.toString().endsWith(pattern)) {
-                        return sBuffer.toString();
-                    }
-                }
-                ch = (char) this.inputStream.read();
-                System.out.println(ch);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+	public String readUntil(String pattern) {
+		char lastChar = pattern.charAt(pattern.length() - 1);
+		StringBuffer sBuffer = new StringBuffer();
+		try {
+			char ch = (char) this.inputStream.read();
+			while (true) {
+				sBuffer.append(ch);
+				if (ch == lastChar) {
+					if (sBuffer.toString().endsWith(pattern)) {
+						return sBuffer.toString();
+					}
+				}
+				ch = (char) this.inputStream.read();
+				System.out.println(ch);
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 
-        return null;
-    }
+		return null;
+	}
 
-    public void write(String value) {
-        out.println(value);
-        out.flush();
-    }
+	public void write(String value) {
+		out.println(value);
+		out.flush();
+	}
 
-    public void login() {
+	public void login() {
 
-        readUntil("login:");
-        write(this.remoteShellDTO.getLoginUsername());
+		readUntil("login:");
+		write(this.remoteShellDTO.getLoginUsername());
 
-        readUntil("password:");
+		readUntil("password:");
 
-        write(this.remoteShellDTO.getLoginPassword());
+		write(this.remoteShellDTO.getLoginPassword());
 
-        readUntil(this.remoteShellDTO.getPrompt() + "");
-    }
+		readUntil(this.remoteShellDTO.getPrompt() + "");
+	}
 
-    public void disconnect() {
-        try {
-            this.telnetClient.disconnect();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+	public void disconnect() {
+		try {
+			this.telnetClient.disconnect();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 
-    public static void main(String[] args) {
-
-        RemoteShellDTO remoteShellDTO = new RemoteShellDTO();
-
-        // remoteShellDTO.setRemoteIp("192.168.110.15");
-        // remoteShellDTO.setRemotePort(23);
-        // remoteShellDTO.setLoginUsername("admin");
-        // remoteShellDTO.setLoginPassword("Admin@123");
-        // remoteShellDTO.setRemoteShell("ls");
-
-        remoteShellDTO.setRemoteIp("192.168.110.57");
-        remoteShellDTO.setRemotePort(23);
-        remoteShellDTO.setLoginUsername("administrator");
-        remoteShellDTO.setLoginPassword("AutoTest123");
-        remoteShellDTO.setRemoteShell("tasklist");
-        RemoteShellExec remoteShellExec = new RemoteShellExec();
-        remoteShellExec.setRemoteShellDTO(remoteShellDTO);
-        remoteShellExec.execute();
-    }
+	// public static void main(String[] args) {
+	//
+	// RemoteShellDTO remoteShellDTO = new RemoteShellDTO();
+	//
+	// // remoteShellDTO.setRemoteIp("192.168.110.15");
+	// // remoteShellDTO.setRemotePort(23);
+	// // remoteShellDTO.setLoginUsername("admin");
+	// // remoteShellDTO.setLoginPassword("Admin@123");
+	// // remoteShellDTO.setRemoteShell("ls");
+	//
+	// remoteShellDTO.setRemoteIp("192.168.110.57");
+	// remoteShellDTO.setRemotePort(23);
+	// remoteShellDTO.setLoginUsername("administrator");
+	// remoteShellDTO.setLoginPassword("AutoTest123");
+	// remoteShellDTO.setRemoteShell("tasklist");
+	// RemoteShellExec remoteShellExec = new RemoteShellExec();
+	// remoteShellExec.setRemoteShellDTO(remoteShellDTO);
+	// remoteShellExec.execute();
+	// }
 }

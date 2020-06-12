@@ -2,7 +2,7 @@
 
 <configuration>
 	<substitutionProperty name="log.base"
-		value="logs/log" />
+		value="../logs/${project.artifactId}_log/log" />
 
 	<jmxConfigurator />
 

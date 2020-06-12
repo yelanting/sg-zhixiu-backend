@@ -27,4 +27,4 @@
 value="../logs/${project.artifactId}_log/log"
 ```
 
-![日志存放位置](../sg-zhixiu-backend/readMeFiles/日志目录.png)
+![日志存放位置](./readMeFiles/日志目录.png)

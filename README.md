@@ -28,3 +28,6 @@ value="../logs/${project.artifactId}_log/log"
 ```
 
 ![日志存放位置](./readMeFiles/日志目录.png)
+
+![日志存放位置](https://github.com/yelanting/sg-zhixiu-backend/blob/master/readMeFiles/%E6%97%A5%E5%BF%97%E7%9B%AE%E5%BD%95.png)
+

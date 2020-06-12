@@ -55,6 +55,9 @@
 	<logger name="org.mongodb.driver">
 		<level value="ERROR" />
 	</logger>
+	<logger name="com.netflix.discovery.*">
+		<level value="DEBUG" />
+	</logger>
 	<root>
 		<level value="DEBUG" />
 		<appender-ref ref="stdout" />

@@ -19,9 +19,7 @@ public interface OrderService {
 
 	Order queryOrderByOrderId(Long id);
 
-	Order insertOrder(Order record);
-
-	Order updateOrder(Order record);
+	Order save(Order record);
 
 	Order deleteOrder(Long id);
 }

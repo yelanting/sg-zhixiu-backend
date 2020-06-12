@@ -1,0 +1,25 @@
+server:
+   port: 8093
+   address: 0.0.0.0
+   maxPostSize: -1
+   maxHttpHeaderSize: 102400
+spring:
+   mvc:
+      static-path-pattern: /**
+   application:
+      name: sg-zhixiu-order
+   jackson:
+      date-format: yyyy-MM-dd HH:mm:ss
+      time-zone: GMT+8
+   main:
+      allow-bean-definition-overriding: true
+management:
+   endpoint:
+      shutdown:
+         enabled: false
+   endpoints:
+      web:
+         exposure:
+            include: '*'
+mybatis:
+   mapper-locations: classpath:mappers/*Mapper.xml

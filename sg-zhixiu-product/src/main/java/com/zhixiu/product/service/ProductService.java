@@ -19,9 +19,7 @@ public interface ProductService {
 
 	Product queryProductByProductId(Long id);
 
-	Product insertProduct(Product record);
-
-	Product updateProduct(Product record);
+	Product save(Product record);
 
 	Product deleteProduct(Long id);
 }

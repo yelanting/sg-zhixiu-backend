@@ -1,4 +1,4 @@
-use sg_zhixiu;
+use `sg_zhixiu_order`;
 SELECT
    concat
 
@@ -10,5 +10,5 @@ SELECT
 FROM
    information_schema.tables
 WHERE
-   table_schema = 'sg_zhixiu';
+   table_schema = 'sg_zhixiu_order';
 SET FOREIGN_KEY_CHECKS= 0;

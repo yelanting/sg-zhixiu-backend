@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhixiu.order.mapper.OrderMapper">
+	<resultMap id="BaseResultMap"
+		type="com.zhixiu.order.model.Order">
+		<id column="id" jdbcType="BIGINT" property="id" />
+		<result column="number" jdbcType="BIGINT" property="number" />
+		<result column="user_id" jdbcType="BIGINT" property="userId" />
+		<result column="product_id" jdbcType="BIGINT"
+			property="productId" />
+		<result column="description" jdbcType="VARCHAR"
+			property="description" />
+		<result column="create_by" jdbcType="VARCHAR"
+			property="createBy" />
+		<result column="create_time" jdbcType="TIMESTAMP"
+			property="createTime" />
+		<result column="update_by" jdbcType="VARCHAR"
+			property="updateBy" />
+		<result column="update_time" jdbcType="TIMESTAMP"
+			property="updateTime" />
+		<result column="remarks" jdbcType="VARCHAR" property="remarks" />
+		<result column="del_flag" jdbcType="TINYINT" property="delFlag" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id,
+		`number`,
+		user_id,
+		product_id,
+		description,
+		create_by,
+		create_time,
+		update_by,
+		update_time,
+		remarks,
+		del_flag
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Long"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from `order`
+		where id = #{id,jdbcType=BIGINT}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from
+		order
+		where id = #{id,jdbcType=BIGINT}
+	</delete>
+	<insert id="insert" useGeneratedKeys="true" keyProperty="id"
+		parameterType="com.zhixiu.order.model.Order">
+		insert into `order` (id,
+		number,
+		user_id,
+		product_id,
+		description,
+		create_by,
+		create_time,
+		update_by,
+		update_time,
+		remarks,
+		del_flag
+		)
+		values
+		(#{id,jdbcType=BIGINT},
+		#{number,jdbcType=VARCHAR},
+		#{userId,jdbcType=BIGINT},
+		#{productId,jdbcType=BIGINT},
+		#{description,jdbcType=VARCHAR},
+		#{createBy,jdbcType=VARCHAR},
+		CURRENT_TIMESTAMP(),
+		#{updateBy,jdbcType=VARCHAR},
+		CURRENT_TIMESTAMP(),
+		#{remarks,jdbcType=VARCHAR},
+		#{delFlag,jdbcType=TINYINT}
+		)
+	</insert>
+	<update id="updateByPrimaryKey"
+		parameterType="com.zhixiu.order.model.Order">
+		update `order`
+		set number =
+		#{number,jdbcType=VARCHAR},
+		user_id =
+		#{userId,jdbcType=BIGINT},
+		productId =
+		#{product_id,jdbcType=BIGINT},
+		description =
+		#{description,jdbcType=VARCHAR},
+		create_by =
+		#{createBy,jdbcType=VARCHAR},
+		create_time =
+		#{createTime,jdbcType=TIMESTAMP},
+		update_by =
+		#{updateBy,jdbcType=VARCHAR},
+		update_time =
+		CURRENT_TIMESTAMP(),
+		remarks
+		=
+		#{remarks,jdbcType=VARCHAR},
+		del_flag =
+		#{delFlag,jdbcType=TINYINT}
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+
+	<select id="findAll" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from `order`
+	</select>
+</mapper>

@@ -14,9 +14,9 @@ import com.zhixiu.core.model.BaseModel;
  */
 public class Order extends BaseModel {
 	private Integer number;
-	private Integer product_id;
+	private Integer productId;
 
-	private Integer user_id;
+	private Integer userId;
 
 	public Integer getNumber() {
 		return number;
@@ -26,26 +26,26 @@ public class Order extends BaseModel {
 		this.number = number;
 	}
 
-	public Integer getProduct_id() {
-		return product_id;
+	public Integer getProductId() {
+		return productId;
 	}
 
-	public void setProduct_id(Integer product_id) {
-		this.product_id = product_id;
+	public void setProductId(Integer productId) {
+		this.productId = productId;
 	}
 
-	public Integer getUser_id() {
-		return user_id;
+	public Integer getUserId() {
+		return userId;
 	}
 
-	public void setUser_id(Integer user_id) {
-		this.user_id = user_id;
+	public void setUserId(Integer userId) {
+		this.userId = userId;
 	}
 
 	@Override
 	public String toString() {
-		return "Order [number=" + number + ", product_id=" + product_id
-		        + ", user_id=" + user_id + "]";
+		return "Order [number=" + number + ", productId=" + productId
+		        + ", userId=" + userId + "]";
 	}
 
 }

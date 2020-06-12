@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import com.zhixiu.product.mapper.ProductMapper;
 import com.zhixiu.product.model.Product;
 import com.zhixiu.product.service.ProductService;
+import com.zhixiu.util.exception.base.BusinessValidationException;
 
 /**
  * @author : Administrator
@@ -35,14 +36,18 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public Product insertProduct(Product record) {
-		int result = productMapper.save(record);
-		return record;
-	}
+	public Product save(Product record) {
+		int result = -1;
+		if (null != record.getId()) {
+			result = productMapper.updateByPrimaryKey(record);
+		} else {
+			result = productMapper.insert(record);
+		}
 
-	@Override
-	public Product updateProduct(Product record) {
-		int result = productMapper.save(record);
+		if (-1 == result) {
+			throw new BusinessValidationException("更新或者新增产品失败");
+		}
+
 		return record;
 	}
 

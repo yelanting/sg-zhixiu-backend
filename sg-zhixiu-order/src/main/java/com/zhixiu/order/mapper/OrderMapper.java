@@ -22,8 +22,6 @@ public interface OrderMapper {
 
 	int insert(Order record);
 
-	int save(Order record);
-
 	Order selectByPrimaryKey(Long id);
 
 	int updateByPrimaryKey(Order record);

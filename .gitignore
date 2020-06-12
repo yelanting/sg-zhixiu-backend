@@ -23,6 +23,7 @@ bin/*
 .mvn/*
 **/test-output/
 **/test-output/*
+**/logs
 **/logs/
 **/logs/*
 

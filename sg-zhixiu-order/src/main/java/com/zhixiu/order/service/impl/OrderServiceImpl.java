@@ -35,14 +35,14 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public Order insertOrder(Order record) {
-		int result = orderMapper.save(record);
-		return record;
-	}
+	public Order save(Order record) {
+		int result = -1;
+		if (null != record.getId()) {
+			result = orderMapper.updateByPrimaryKey(record);
+		} else {
+			result = orderMapper.insert(record);
+		}
 
-	@Override
-	public Order updateOrder(Order record) {
-		int result = orderMapper.save(record);
 		return record;
 	}
 

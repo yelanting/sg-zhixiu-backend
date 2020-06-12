@@ -27,14 +27,14 @@ public class BaseModel {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	private String createUser;
+	private String createBy;
 
 	@DateTimeFormat(pattern = CalendarUtil.DEFAULT_FORMAT_WHOLE)
-	private Date createDate;
+	private Date createTime;
 
-	private String updateUser;
+	private String updateBy;
 	@DateTimeFormat(pattern = CalendarUtil.DEFAULT_FORMAT_WHOLE)
-	private Date updateDate;
+	private Date updateTime;
 
 	private String sortField;
 
@@ -44,6 +44,10 @@ public class BaseModel {
 
 	private String description;
 
+	private Boolean delFlag;
+
+	private String remarks;
+
 	public Long getId() {
 		return id;
 	}
@@ -52,20 +56,20 @@ public class BaseModel {
 		this.id = id;
 	}
 
-	public String getCreateUser() {
-		return createUser;
+	public String getCreateBy() {
+		return createBy;
 	}
 
-	public void setCreateUser(String createUser) {
-		this.createUser = createUser;
+	public void setCreateBy(String createBy) {
+		this.createBy = createBy;
 	}
 
 	public String getUpdateUser() {
-		return updateUser;
+		return updateBy;
 	}
 
-	public void setUpdateUser(String updateUser) {
-		this.updateUser = updateUser;
+	public void setUpdateUser(String updateBy) {
+		this.updateBy = updateBy;
 	}
 
 	public String getSortField() {
@@ -81,21 +85,21 @@ public class BaseModel {
 	}
 
 	@DateTimeFormat(pattern = CalendarUtil.DEFAULT_FORMAT_WHOLE)
-	public Date getCreateDate() {
-		return createDate;
+	public Date getCreateTime() {
+		return createTime;
 	}
 
-	public void setCreateDate(Date createDate) {
-		this.createDate = createDate;
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
 	}
 
 	@DateTimeFormat(pattern = CalendarUtil.DEFAULT_FORMAT_WHOLE)
-	public Date getUpdateDate() {
-		return updateDate;
+	public Date getUpdateTime() {
+		return updateTime;
 	}
 
-	public void setUpdateDate(Date updateDate) {
-		this.updateDate = updateDate;
+	public void setUpdateTime(Date updateTime) {
+		this.updateTime = updateTime;
 	}
 
 	public void setOrder(String order) {
@@ -117,4 +121,39 @@ public class BaseModel {
 	public void setDescription(String description) {
 		this.description = description;
 	}
+
+	public Boolean getDelFlag() {
+		return delFlag;
+	}
+
+	public void setDelFlag(Boolean delFlag) {
+		this.delFlag = delFlag;
+	}
+
+	@Override
+	public String toString() {
+		return "BaseModel [id=" + id + ", createBy=" + createBy
+		        + ", createTime=" + createTime + ", updateBy=" + updateBy
+		        + ", updateTime=" + updateTime + ", sortField=" + sortField
+		        + ", order=" + order + ", mobile=" + mobile + ", description="
+		        + description + ", delFlag=" + delFlag + ", remarks=" + remarks
+		        + "]";
+	}
+
+	public String getUpdateBy() {
+		return updateBy;
+	}
+
+	public void setUpdateBy(String updateBy) {
+		this.updateBy = updateBy;
+	}
+
+	public String getRemarks() {
+		return remarks;
+	}
+
+	public void setRemarks(String remarks) {
+		this.remarks = remarks;
+	}
+
 }

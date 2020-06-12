@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -25,7 +26,8 @@ import com.zhixiu.util.vo.ResponseData;
  * @see :
  */
 @RestController
-@RequestMapping("/product")
+@RequestMapping(value = "/product", method = { RequestMethod.GET,
+        RequestMethod.POST, RequestMethod.DELETE, RequestMethod.PUT })
 public class ProductController {
 	@Autowired
 	private ProductService productService;
@@ -44,14 +46,12 @@ public class ProductController {
 
 	@PostMapping("/insertProduct")
 	public ResponseData insertProduct(@RequestBody ProductVO product) {
-		return ResponseData
-		        .getSuccessResult(productService.insertProduct(product));
+		return ResponseData.getSuccessResult(productService.save(product));
 	}
 
 	@PutMapping("/updateProduct")
 	public ResponseData updateProduct(@RequestBody ProductVO product) {
-		return ResponseData
-		        .getSuccessResult(productService.updateProduct(product));
+		return ResponseData.getSuccessResult(productService.save(product));
 	}
 
 	@DeleteMapping("/deleteProduct")

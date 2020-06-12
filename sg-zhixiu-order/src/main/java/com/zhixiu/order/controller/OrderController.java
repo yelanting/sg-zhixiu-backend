@@ -43,12 +43,12 @@ public class OrderController {
 
 	@PostMapping("/insertOrder")
 	public ResponseData insertOrder(@RequestBody Order order) {
-		return ResponseData.getSuccessResult(orderService.insertOrder(order));
+		return ResponseData.getSuccessResult(orderService.save(order));
 	}
 
 	@PutMapping("/updateOrder")
 	public ResponseData updateOrder(@RequestBody Order order) {
-		return ResponseData.getSuccessResult(orderService.updateOrder(order));
+		return ResponseData.getSuccessResult(orderService.save(order));
 	}
 
 	@DeleteMapping("/deleteOrder")

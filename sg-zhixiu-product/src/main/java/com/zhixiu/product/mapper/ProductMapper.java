@@ -19,8 +19,6 @@ public interface ProductMapper {
 
 	int insert(Product record);
 
-	int save(Product record);
-
 	Product selectByPrimaryKey(Long id);
 
 	int updateByPrimaryKey(Product record);
